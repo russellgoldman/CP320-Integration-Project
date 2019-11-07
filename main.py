@@ -14,8 +14,8 @@ if __name__ == '__main__':
         digit = None
         while digit == None:
             digit = kp.getKey()
-            print(digit)
         seq.append(digit)
+        print(digit)
         time.sleep(0.4)
  
     # Check digit code
