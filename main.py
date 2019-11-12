@@ -1,7 +1,6 @@
 import time
 import RPi.GPIO as GPIO
 from keypad import keypad
-from max7219 import runMAX7219
  
 GPIO.setwarnings(False)
  
@@ -23,6 +22,3 @@ if __name__ == '__main__':
     print(seq)
     if seq == [1, 2, 3, '#']:
         print("Code accepted")
-        runMAX7219(seq, True)
-    else:
-        runMAX7219(seq, False)
