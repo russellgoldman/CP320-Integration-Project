@@ -38,7 +38,3 @@ if __name__ == '__main__':
         s.open_lock(True)
     else:
         runMAX7219(seq, "reject")
-
-    except KeyboardInterrupt:
-        l.open_lock(False)
-        pass
