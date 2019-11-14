@@ -8,8 +8,8 @@ class lock():
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(18, GPIO.OUT)
 
-        p = GPIO.PWM(18, 50)  # channel=18 frequency=60Hz
-        p.start(6)
+        self.p = GPIO.PWM(18, 50)  # channel=18 frequency=60Hz
+        self.p.start(6)
         time.sleep(1)
 
     def findValues(angle):
@@ -19,13 +19,13 @@ class lock():
     def open_lock(self, open):
         try:
             if open:
-                p.ChangeDutyCycle(findValues(90))  # 90 degrees
+                self.p.ChangeDutyCycle(findValues(90))  # 90 degrees
                 time.sleep(1)
             else:
-                p.ChangeDutyCycle(findValues(0))
+                self.p.ChangeDutyCycle(findValues(0))
         except KeyboardInterrupt:
-            p.ChangeDutyCycle(findValues(0))
+            self.p.ChangeDutyCycle(findValues(0))
             pass
 
-        p.stop()
+        self.p.stop()
         GPIO.cleanup()

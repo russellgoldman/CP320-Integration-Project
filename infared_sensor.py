@@ -18,10 +18,10 @@ class sensor():
     def check_reading(self):
         try:
             while True:
-                self.adc=self.spi.xfer2([1,(8+self.adc_channel)<<4,0])
-                data=((self.adc[1]&3)<<8) +self.adc[2]
+                adc=self.spi.xfer2([1,(8+self.adc_channel)<<4,0])
+                data=((self.adc[1]&3)<<8) + adc[2]
                 self.data_scale=(data*3.3)/float(1023)
-                self.data_scale=round(data_scale,2)
+                self.data_scale=round(self.data_scale,2)
 
                 if self.data_scale >= self.data_scale_min:
                     self.data_scale_count += 1

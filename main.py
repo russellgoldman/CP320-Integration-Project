@@ -1,7 +1,7 @@
 import time
 import RPi.GPIO as GPIO
 from keypad import keypad
-from max7219 import runMAX7219
+from max7219 import display
 from infared_sensor import sensor
 from servo_motor import lock
  
@@ -12,6 +12,7 @@ if __name__ == '__main__':
     kp = keypad()
     s = sensor()
     l = lock()
+    d = display()
  
     # check if the infared sensor detects someone
     ok = False
@@ -31,10 +32,10 @@ if __name__ == '__main__':
     print(seq)
 
     if not ok:
-        runMAX7219(seq, "too_far")
+        d.runMAX7219(seq, "too_far")
     elif seq == [1, 2, 3, '#']:
         print("Code accepted")
-        runMAX7219(seq, "confirm")
+        d.runMAX7219(seq, "confirm")
         s.open_lock(True)
     else:
-        runMAX7219(seq, "reject")
+        d.runMAX7219(seq, "reject")
