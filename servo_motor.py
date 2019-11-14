@@ -5,10 +5,10 @@ import RPi.GPIO as GPIO
 
 class lock():
     def __init__(self):
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(12, GPIO.OUT)
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(18, GPIO.OUT)
 
-        p = GPIO.PWM(12, 50)  # channel=12 frequency=60Hz
+        p = GPIO.PWM(18, 50)  # channel=18 frequency=60Hz
         p.start(6)
         time.sleep(1)
 
