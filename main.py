@@ -18,24 +18,25 @@ if __name__ == '__main__':
     ok = False
     ok = s.check_reading()
 
-    ###### 4 Digit wait ######
-    seq = []
-    for i in range(4):
-        digit = None
-        while digit == None:
-            digit = kp.getKey()
-        seq.append(digit)
-        print(digit)
-        time.sleep(0.4)
- 
-    # Check digit code
-    print(seq)
-
     if not ok:
-        d.runMAX7219(seq, "too_far")
-    elif seq == [1, 2, 3, '#']:
-        print("Code accepted")
-        d.runMAX7219(seq, "confirm")
-        s.open_lock(True)
+        d.runMAX7219(null, "too_far")
     else:
-        d.runMAX7219(seq, "reject")
+        ###### 4 Digit wait ######
+        seq = []
+        for i in range(4):
+            digit = None
+            while digit == None:
+                digit = kp.getKey()
+            seq.append(digit)
+            print(digit)
+            time.sleep(0.4)
+    
+        # Check digit code
+        print(seq)
+
+        if seq == [1, 2, 3, '#']:
+            print("Code accepted")
+            d.runMAX7219(seq, "confirm")
+            s.open_lock(True)
+        else:
+            d.runMAX7219(seq, "reject")

@@ -19,7 +19,7 @@ class sensor():
         try:
             while True:
                 adc=self.spi.xfer2([1,(8+self.adc_channel)<<4,0])
-                data=((self.adc[1]&3)<<8) + adc[2]
+                data=((adc[1]&3)<<8) + adc[2]
                 self.data_scale=(data*3.3)/float(1023)
                 self.data_scale=round(self.data_scale,2)
 
