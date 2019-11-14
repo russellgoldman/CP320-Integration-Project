@@ -15,15 +15,17 @@ device.contrast(5)
 virtual = viewport(device, width=32, height=16)
 show_message(device, 'Raspberry Pi MAX7219', fill="white", font=proportional(LCD_FONT), scroll_delay=0.08)
 
-def runMAX7219(code, ok):
+def runMAX7219(code, mode):
     try:
         print("Code: %s" % code)
         while True:
             with canvas(virtual) as draw:
-                if not ok:
+                if mode == "confirm":
                     text(draw, (0, 1), "X", fill="white", font=proportional(CP437_FONT))
-                else:
+                elif mode == "reject":
                     text(draw, (0, 1), "O", fill="white", font=proportional(CP437_FONT))
+                elif mode == "too_far":
+                    text(draw, (0, 1), "^", fill="white", font=proportional(CP437_FONT))
 
     except KeyboardInterrupt:
         GPIO.cleanup()
