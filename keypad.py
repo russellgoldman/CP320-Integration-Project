@@ -59,7 +59,7 @@ class keypad():
         read_check = 1
         for j in range(len(self.COLUMN)):
             tmpRead = GPIO.input(self.COLUMN[j])
-            if tmpRead == READ_CHECK:
+            if tmpRead == read_check:
                 colVal=j
                  
         # if colVal is not 0 thru 2 then no button was pressed and we can exit
