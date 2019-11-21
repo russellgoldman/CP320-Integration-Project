@@ -36,10 +36,8 @@ class sensor():
         try:
             i = 0
             while i < self.LOOP_COUNT:
-                adc = self.spi.xfer2([self.START_BYTE, (self.adc_channel + self.CHANNEL_INCREMENT)
-                    << self.BITWISE_SHIFT, self.BITWISE_SHIFT_DEFAULT])
-                data = ((adc[self.ADC_END_INDEX] & self.BITWISE_AND_CHECK) << self.DATA_BITWISE_SHIFT)
-                    + adc[self.ADC_END_INDEX]
+                adc = self.spi.xfer2([self.START_BYTE, (self.adc_channel + self.CHANNEL_INCREMENT) << self.BITWISE_SHIFT, self.BITWISE_SHIFT_DEFAULT])
+                data = ((adc[self.ADC_END_INDEX] & self.BITWISE_AND_CHECK) << self.DATA_BITWISE_SHIFT) + adc[self.ADC_END_INDEX]
                 data_scale = (data * self.DATA_SCALE_MULTIPLIER) / float(self.DATA_SCALE_DIVIDER)
                 data_scale = round(data_scale, self.ADC_END_INDEX)
                 print(data_scale)
