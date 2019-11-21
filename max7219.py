@@ -27,7 +27,7 @@ class display():
 
         self.serial = spi(port=SERIAL_PORT, device=SERIAL_DEVICE, gpio=noop())
         self.device = max7219(self.serial, width=DEVICE_WIDTH, height=DEVICE_HEIGHT, block_orientation=DEVICE_BLOCK_ORIENTATION)
-        self.device.contrast(DEVICE_BLOCK_ORIENTATION)
+        self.device.contrast(DEVICE_CONTRAST)
         self.virtual = viewport(self.device, width=VIRTUAL_WIDTH, height=VIRTUAL_HEIGHT)
     
     def runMAX7219(self, code, mode):
