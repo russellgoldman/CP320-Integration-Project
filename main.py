@@ -8,6 +8,10 @@ from servo_motor import lock
 GPIO.setwarnings(False)
 
 if __name__ == '__main__':
+    # config
+    INCREMENT = 1
+    TIME_SLEEP = 0.4
+
     correct_seq = []
     digit = input("Enter a digit (-1 to finish): ")
     while digit != "-1":
@@ -37,6 +41,7 @@ if __name__ == '__main__':
             print("Enter a code: ")
             seq = []
             i = 0
+
             while i < len(correct_seq):
                 digit = None
                 while digit == None:
@@ -46,10 +51,10 @@ if __name__ == '__main__':
                     l.open_lock(False)
                     kp = keypad()
                 else:
-                    i += 1
+                    i += INCREMENT
                     seq.append(str(digit))
                 print(str(digit))
-                time.sleep(0.4)
+                time.sleep(TIME_SLEEP)
 
             # Check digit code
             print(seq)

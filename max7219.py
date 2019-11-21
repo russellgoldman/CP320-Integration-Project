@@ -11,23 +11,45 @@ from luma.core.legacy.font import proportional, CP437_FONT, LCD_FONT
 
 class display():
     def __init__(self):
-        self.serial = spi(port=0, device=0, gpio=noop())
-        self.device = max7219(self.serial, width=32, height=8, block_orientation=-90)
-        self.device.contrast(5)
-        self.virtual = viewport(self.device, width=32, height=16)
-        #show_message(device, 'Raspberry Pi MAX7219', fill="white", font=proportional(LCD_FONT), scroll_delay=0.08)
+        # serial
+        SERIAL_PORT = 0
+        SERIAL_DEVICE = 0
+
+        # device
+        DEVICE_WIDTH = 32
+        DEVICE_HEIGHT = 8
+        DEVICE_BLOCK_ORIENTATION = -90
+        DEVICE_CONTRAST = 5
+
+        # virtual
+        VIRTUAL_WIDTH = 32
+        VIRTUAL_HEIGHT = 16
+
+        self.serial = spi(port=SERIAL_PORT, device=SERIAL_DEVICE, gpio=noop())
+        self.device = max7219(self.serial, width=DEVICE_WIDTH, height=DEVICE_HEIGHT, block_orientation=DEVICE_BLOCK_ORIENTATION)
+        self.device.contrast(DEVICE_BLOCK_ORIENTATION)
+        self.virtual = viewport(self.device, width=VIRTUAL_WIDTH, height=VIRTUAL_HEIGHT)
     
     def runMAX7219(self, code, mode):
         try:
-            print("Code: %s" % code)
+            # draw config
+            DRAW_START = 0
+            DRAW_END = 1
+            FILL = "WHITE"
+
+            # draw text
+            CONFIRM = "O"
+            REJECT = "X"
+            TOO_FAR = "^"
+
             while True:
                 with canvas(self.virtual) as draw:
                     if mode == "confirm":
-                        text(draw, (0, 1), "O", fill="white", font=proportional(CP437_FONT))
+                        text(draw, (DRAW_START, DRAW_END), CONFIRM, fill=FILL, font=proportional(CP437_FONT))
                     elif mode == "reject":
-                        text(draw, (0, 1), "X", fill="white", font=proportional(CP437_FONT))
+                        text(draw, (DRAW_START, DRAW_END), REJECT, fill=FILL, font=proportional(CP437_FONT))
                     elif mode == "too_far":
-                        text(draw, (0, 1), "^", fill="white", font=proportional(CP437_FONT))
+                        text(draw, (DRAW_START, DRAW_END), TOO_FAR, fill=FILL, font=proportional(CP437_FONT))
 
         except KeyboardInterrupt:
             GPIO.cleanup()

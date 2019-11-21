@@ -31,13 +31,17 @@ class keypad():
         # Scan rows for pushed key/button
         # A valid key press should set "rowVal"  between 0 and 3.
         rowVal = -1
+        read_check = 0
         for i in range(len(self.ROW)):
             tmpRead = GPIO.input(self.ROW[i])
-            if tmpRead == 0:
+            if tmpRead == read_check:
                 rowVal = i
                  
         # if rowVal is not 0 thru 3 then no button was pressed and we can exit
-        if rowVal <0 or rowVal >3:
+
+        ROW_START = 0
+        ROW_END = 3
+        if rowVal < ROW_START or rowVal > ROW_END:
             self.exit()
             return
          
@@ -52,13 +56,16 @@ class keypad():
         # Scan columns for still-pushed key/button
         # A valid key press should set "colVal"  between 0 and 2.
         colVal = -1
+        read_check = 1
         for j in range(len(self.COLUMN)):
             tmpRead = GPIO.input(self.COLUMN[j])
-            if tmpRead == 1:
+            if tmpRead == READ_CHECK:
                 colVal=j
                  
         # if colVal is not 0 thru 2 then no button was pressed and we can exit
-        if colVal <0 or colVal >2:
+        COL_START = 0
+        COL_END = 2
+        if colVal < COL_START or colVal > COL_END:
             self.exit()
             return
  
