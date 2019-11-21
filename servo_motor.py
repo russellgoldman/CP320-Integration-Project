@@ -19,7 +19,7 @@ class lock():
 
         self.p = GPIO.PWM(CHANNEL, FREQUENCY)
         self.p.start(self.findValues(self.CLOSE_LOCK))
-        time.sleep(TIME_SLEEP)
+        time.sleep(self.TIME_SLEEP)
 
     # finds desired angle in degrees
     def findValues(self, angle):
