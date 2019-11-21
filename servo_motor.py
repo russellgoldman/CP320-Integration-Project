@@ -11,8 +11,8 @@ class lock():
         self.TIME_SLEEP = 1
 
         # motor angles
-        self.OPEN_LOCK = 0
-        self.CLOSE_LOCK = 90
+        self.CLOSE_LOCK = 0
+        self.OPEN_LOCK = 90
 
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(CHANNEL, GPIO.OUT)
