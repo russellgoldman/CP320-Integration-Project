@@ -42,7 +42,12 @@ class display():
             REJECT = "X"
             TOO_FAR = "^"
 
-            while True:
+            # loop
+            i = 0
+            MAX_LOOP = 500
+            INCREMENT = 1
+
+            while i < MAX_LOOP:
                 with canvas(self.virtual) as draw:
                     if mode == "confirm":
                         text(draw, (DRAW_START, DRAW_END), CONFIRM, fill=FILL, font=proportional(CP437_FONT))
@@ -50,6 +55,7 @@ class display():
                         text(draw, (DRAW_START, DRAW_END), REJECT, fill=FILL, font=proportional(CP437_FONT))
                     elif mode == "too_far":
                         text(draw, (DRAW_START, DRAW_END), TOO_FAR, fill=FILL, font=proportional(CP437_FONT))
+                i += INCREMENT
 
         except KeyboardInterrupt:
             GPIO.cleanup()
