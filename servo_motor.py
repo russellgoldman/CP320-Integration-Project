@@ -18,14 +18,14 @@ class lock():
         GPIO.setup(CHANNEL, GPIO.OUT)
 
         self.p = GPIO.PWM(CHANNEL, FREQUENCY)
-        self.p.start(self.findValues(self.LOCK_ANGLE))
+        self.p.start(self.findValues(self.CLOSE_LOCK))
         time.sleep(TIME_SLEEP)
 
     # finds desired angle in degrees
     def findValues(self, angle):
         SLOPE = 8 / 180
         Y_INTERCEPT = 6.25
-        
+
         return SLOPE * angle + Y_INTERCEPT
 
     def open_lock(self, open):
